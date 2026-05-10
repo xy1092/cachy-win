@@ -42,7 +42,7 @@ docs/physical-disk.md               existing Windows disk notes
 On CachyOS/Arch:
 
 ```bash
-sudo pacman -S --needed qemu-full libvirt virt-manager edk2-ovmf dnsmasq bridge-utils virtio-win
+sudo pacman -S --needed qemu-full libvirt virt-manager edk2-ovmf dnsmasq virtio-win
 sudo systemctl enable --now libvirtd
 sudo usermod -aG libvirt,kvm "$USER"
 ```
