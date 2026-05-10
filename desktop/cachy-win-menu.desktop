@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Cachy Win Menu
+Comment=Open the Windows VM chooser
+Exec=sh -lc '/home/xy/cachy-win/scripts/gui.sh'
+Terminal=false
+Categories=System;Utility;

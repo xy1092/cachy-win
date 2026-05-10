@@ -42,6 +42,7 @@ env.example                         host-specific settings template
 check.sh                            host readiness and safety checks
 xml/*.xml.in                        libvirt XML templates
 scripts/render-domain.sh            renders XML into build/
+scripts/gui.sh                      graphical chooser for common actions
 scripts/launch.sh                   starts office or gaming profile
 scripts/stop.sh                     stops a profile and releases gaming GPU
 scripts/gpu-bind.sh                 binds/unbinds the GPU to vfio-pci
@@ -94,6 +95,12 @@ Office:
 
 ```bash
 ./scripts/launch.sh office
+```
+
+Graphical chooser:
+
+```bash
+./scripts/gui.sh
 ```
 
 Gaming:
