@@ -10,6 +10,19 @@ The repository provides two launch paths:
 - `gaming`: larger CPU/RAM profile, host-passthrough CPU, optional hugepages,
   and a dedicated GPU passed through with VFIO.
 
+## Compatibility First
+
+The goal is stability and predictable hardware presentation, not bypassing
+software checks. For picky Windows apps:
+
+- Start with `office` before `gaming`.
+- Keep one Windows install per VM definition.
+- Use a VM-owned EFI disk where possible.
+- Disable Fast Startup and hibernation in Windows.
+- Add the VirtIO drivers before switching a disk to VirtIO.
+
+See [docs/compatibility-first.md](docs/compatibility-first.md).
+
 ## Result of the Claude Debate
 
 Claude and Codex converged on this boundary:

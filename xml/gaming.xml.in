@@ -28,11 +28,7 @@ ${SMBIOS_MODE_XML}
       <synic state='on'/>
       <stimer state='on'/>
       <frequencies state='on'/>
-      <vendor_id state='on' value='cachywin'/>
     </hyperv>
-    <kvm>
-      <hidden state='on'/>
-    </kvm>
     <vmport state='off'/>
     <ioapic driver='kvm'/>
   </features>
