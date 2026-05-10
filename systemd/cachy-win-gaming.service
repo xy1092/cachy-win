@@ -8,6 +8,8 @@ Type=oneshot
 RemainAfterExit=yes
 WorkingDirectory=/opt/cachy-win
 Environment=CACHY_WIN_ENV=/etc/cachy-win.env
+Environment=LIBVIRT_DEFAULT_URI=qemu:///system
+Environment=LIBVIRT_URI=qemu:///system
 ExecStart=/opt/cachy-win/scripts/launch.sh gaming --confirm --no-check
 ExecStop=/opt/cachy-win/scripts/stop.sh gaming --timeout 90
 TimeoutStartSec=120

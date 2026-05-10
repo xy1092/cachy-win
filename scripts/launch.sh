@@ -64,6 +64,7 @@ if [[ -f "$ENV_FILE" ]]; then
 else
   echo "warning: env file not found, using env.example defaults: $ENV_FILE" >&2
 fi
+LIBVIRT_URI="${LIBVIRT_URI:-qemu:///system}"
 
 lock_file="/tmp/cachy-win.lock"
 exec 9>"$lock_file"
@@ -81,7 +82,7 @@ require_cmd() {
 
 dom_running() {
   local name="$1"
-  virsh domstate "$name" >/tmp/cachy-win-domstate.$$ 2>/dev/null || return 1
+  virsh -c "$LIBVIRT_URI" domstate "$name" >/tmp/cachy-win-domstate.$$ 2>/dev/null || return 1
   grep -qi '^running' /tmp/cachy-win-domstate.$$
 }
 
@@ -108,7 +109,7 @@ EOF
 fi
 
 xml_path="$("$ROOT_DIR/scripts/render-domain.sh" "$MODE" --env "$ENV_FILE")"
-virsh define "$xml_path"
+virsh -c "$LIBVIRT_URI" define "$xml_path"
 
 if [[ "$DEFINE_ONLY" == "1" ]]; then
   echo "defined libvirt domain from $xml_path"
@@ -127,6 +128,6 @@ cleanup_on_error() {
   fi
 }
 trap cleanup_on_error ERR
-virsh start "$domain_name"
+virsh -c "$LIBVIRT_URI" start "$domain_name"
 trap - ERR
 echo "started $domain_name"

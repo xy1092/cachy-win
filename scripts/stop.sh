@@ -51,26 +51,27 @@ if [[ -f "$ENV_FILE" ]]; then
   # shellcheck disable=SC1090
   source "$ENV_FILE"
 fi
+LIBVIRT_URI="${LIBVIRT_URI:-qemu:///system}"
 
 domain_name="$([[ "$MODE" == "gaming" ]] && printf '%s' "$CACHY_WIN_GAMING_NAME" || printf '%s' "$CACHY_WIN_OFFICE_NAME")"
 
-if ! virsh domstate "$domain_name" >/dev/null 2>&1; then
+if ! virsh -c "$LIBVIRT_URI" domstate "$domain_name" >/dev/null 2>&1; then
   echo "$domain_name is not defined"
   exit 0
 fi
 
-if virsh domstate "$domain_name" 2>/dev/null | grep -qi '^running'; then
-  virsh shutdown "$domain_name"
+if virsh -c "$LIBVIRT_URI" domstate "$domain_name" 2>/dev/null | grep -qi '^running'; then
+  virsh -c "$LIBVIRT_URI" shutdown "$domain_name"
   deadline=$((SECONDS + TIMEOUT))
   while [[ "$SECONDS" -lt "$deadline" ]]; do
-    if ! virsh domstate "$domain_name" 2>/dev/null | grep -qi '^running'; then
+    if ! virsh -c "$LIBVIRT_URI" domstate "$domain_name" 2>/dev/null | grep -qi '^running'; then
       break
     fi
     sleep 2
   done
 fi
 
-if virsh domstate "$domain_name" 2>/dev/null | grep -qi '^running'; then
+if virsh -c "$LIBVIRT_URI" domstate "$domain_name" 2>/dev/null | grep -qi '^running'; then
   echo "$domain_name is still running; not releasing GPU" >&2
   exit 1
 fi

@@ -49,6 +49,8 @@ elif [[ -f "$ROOT_DIR/env.example" ]]; then
   source "$ROOT_DIR/env.example"
 fi
 
+LIBVIRT_URI="${LIBVIRT_URI:-qemu:///system}"
+
 fails=0
 warns=0
 
@@ -132,6 +134,13 @@ need_cmd flock
 need_cmd lspci
 need_cmd lsblk
 need_cmd virsh
+if command -v virsh >/dev/null 2>&1; then
+  if virsh -c "$LIBVIRT_URI" uri >/dev/null 2>&1; then
+    pass "libvirt connection works: $LIBVIRT_URI"
+  else
+    fail "cannot connect to libvirt URI: $LIBVIRT_URI"
+  fi
+fi
 
 echo
 echo "== CPU virtualization =="

@@ -58,6 +58,7 @@ $EDITOR env.local
 
 Set at least:
 
+- `LIBVIRT_URI`, normally `qemu:///system`.
 - `WINDOWS_DISK_IMAGE` for the default qcow2/raw VM disk.
 - `GAMING_GPU_VIDEO_PCI` and `GAMING_GPU_AUDIO_PCI` for GPU passthrough.
 - `GAMING_MEMORY_MIB`, `GAMING_VCPUS`, `OFFICE_MEMORY_MIB`, and `OFFICE_VCPUS`.
