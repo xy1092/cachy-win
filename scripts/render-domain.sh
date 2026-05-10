@@ -72,7 +72,6 @@ disk_xml() {
       <driver name='qemu' type='qcow2' discard='unmap'/>
       <source file='${WINDOWS_DISK_IMAGE}'/>
       <target dev='${target_dev}' bus='virtio'/>
-      <boot order='1'/>
     </disk>
 EOF
       ;;
@@ -86,7 +85,6 @@ EOF
       <driver name='qemu' type='raw' cache='none' io='native' discard='unmap'/>
       <source dev='${PHYSICAL_WINDOWS_DISK}'/>
       <target dev='${target_dev}' bus='virtio'/>
-      <boot order='1'/>
     </disk>
 EOF
       ;;
