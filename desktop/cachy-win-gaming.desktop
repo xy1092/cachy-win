@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Cachy Win Gaming
+Comment=Start the Windows VM gaming profile
+Exec=sh -lc '/opt/cachy-win/scripts/launch.sh gaming --confirm'
+Terminal=true
+Categories=Game;System;

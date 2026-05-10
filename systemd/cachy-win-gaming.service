@@ -1,0 +1,17 @@
+[Unit]
+Description=Cachy Windows gaming VM with VFIO GPU lifecycle
+After=libvirtd.service virtqemud.service
+Wants=libvirtd.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/opt/cachy-win
+Environment=CACHY_WIN_ENV=/etc/cachy-win.env
+ExecStart=/opt/cachy-win/scripts/launch.sh gaming --confirm --no-check
+ExecStop=/opt/cachy-win/scripts/stop.sh gaming --timeout 90
+TimeoutStartSec=120
+TimeoutStopSec=120
+
+[Install]
+WantedBy=multi-user.target

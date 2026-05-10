@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Cachy Win Office
+Comment=Start the Windows VM office profile
+Exec=sh -lc '/opt/cachy-win/scripts/launch.sh office'
+Terminal=true
+Categories=Office;System;
